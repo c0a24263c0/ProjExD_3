@@ -163,8 +163,11 @@ def main():
     bg_img = pg.image.load("fig/pg_bg.jpg")
     bird = Bird((300, 200))
 
+    # スコア表示
     score_display = Score()
     
+    # Beamクラスの活用のためのリスト
+    multi_beam = []
 
     # bombs = list()  # 爆弾用のリスト
     # for _ in range(NUM_OF_BOMBS):
@@ -184,7 +187,23 @@ def main():
                 # スペースキー押下でBeamクラスのインスタンス生成
                 beam = Beam(bird)            
         screen.blit(bg_img, [0, 0])
-        
+
+        # スペース押した場合beamインスタンス生成、リストappend
+        if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+            beam = Beam(bird)
+            multi_beam.append(beam)
+
+        for b in multi_beam:
+            if beam.rct.colliderect(beam.rct):
+                multi_beam[b] = None
+        multi_beam = [beam for beam in multi_beam if beam is not None]
+
+        if beam is not None:
+            if check_bound(beam.rct) == (False, True):
+                beam = None
+
+
+
         for bomb in bombs:
             if bird.rct.colliderect(bomb.rct):
                 # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
