@@ -174,6 +174,8 @@ def main():
                     beam = None
                     bomb = None
                     # ビームとボムが消える
+                    bird.change_img(6,screen)
+                    # こうかとんを喜んだ画像に変更
 
         
 
