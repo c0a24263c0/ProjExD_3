@@ -163,6 +163,7 @@ def main():
     bg_img = pg.image.load("fig/pg_bg.jpg")
     bird = Bird((300, 200))
 
+    # Scoreクラスを呼び出し、変数に代入
     score_display = Score()
     
 
